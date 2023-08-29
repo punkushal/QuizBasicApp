@@ -6,11 +6,13 @@ class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.min, //center the widgets vertically
         children: [
           Image.asset(
             'assets/images/quiz-logo.png',
             width: 300,
+            color:
+                const Color.fromARGB(150, 255, 255, 255), //adding transparency
           ),
           const SizedBox(
             height: 50,
