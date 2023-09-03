@@ -11,15 +11,21 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget activeScreen = const StartScreen(
-      switchScreen); //At first assigning StartScreen widget to activeScreen variable
-  //Passing pointer to StartScreen()
+  Widget? activeScreen; //? this means activeScreen can be null or widget
+
+  @override
+  void initState() {
+    //this initState() tells that the variabel will be initialized at later stage so no erro throws
+    activeScreen = StartScreen(switchScreen);
+    super.initState();
+  }
+
   void switchScreen() {
     //and when switchScreen() called
     // inside of it there's a setState() which changes the value of activeScreen
     //and again build method runs and now StartScreen replaced with QuestionScreen() widget
     setState(() {
-      activeScreen = QuestionScreen();
+      activeScreen = const QuestionScreen();
     });
   }
 
