@@ -11,21 +11,14 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget? activeScreen; //? this means activeScreen can be null or widget
-
-  @override
-  void initState() {
-    //this initState() tells that the variabel will be initialized at later stage so no erro throws
-    activeScreen = StartScreen(switchScreen);
-    super.initState();
-  }
+  var activeScreen = "start-screen";
 
   void switchScreen() {
     //and when switchScreen() called
     // inside of it there's a setState() which changes the value of activeScreen
     //and again build method runs and now StartScreen replaced with QuestionScreen() widget
     setState(() {
-      activeScreen = const QuestionScreen();
+      activeScreen = "questions-screen";
     });
   }
 
@@ -44,8 +37,10 @@ class _QuizState extends State<Quiz> {
               end: Alignment.bottomRight,
             ),
           ),
-          child:
-              activeScreen, //now activeScreen represents the widget after all
+          child: activeScreen ==
+                  "start-screen" //this is another approach to render content conditionally
+              ? StartScreen(switchScreen)
+              : const QuestionScreen(), //now activeScreen represents the widget after all
         ),
       ),
     );
