@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_basic_app/answer_button.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
@@ -17,25 +18,31 @@ class _QuestionScreenState extends State<QuestionScreen> {
         mainAxisAlignment:
             MainAxisAlignment.center, //align elements to the center
         children: [
-          const Text('Questions....'),
+          const Text(
+            'Questions....',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
           const SizedBox(
             height: 30,
           ),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Answer 1'),
+          AnswerButton(
+            answerText:
+                'Answer 1', //for positional argument we also have to write parameter used as positional argument
+            onTap: () {},
           ),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Answer 2'),
+          AnswerButton(
+            answerText: 'Answer 2',
+            onTap: () {},
           ),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Answer 3'),
+          AnswerButton(
+            answerText: 'Answer 3',
+            onTap: () {},
           ),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Answer 4'),
+          AnswerButton(
+            answerText: 'Answer 4',
+            onTap: () {},
           ),
         ],
       ),
