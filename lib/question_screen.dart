@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_basic_app/answer_button.dart';
+import 'package:quiz_basic_app/data/questions.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
@@ -9,6 +10,8 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
+  final currentQuestion =
+      questions[0]; //used to assign first question with their list of answers
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -18,32 +21,22 @@ class _QuestionScreenState extends State<QuestionScreen> {
         mainAxisAlignment:
             MainAxisAlignment.center, //align elements to the center
         children: [
-          const Text(
-            'Questions....',
-            style: TextStyle(
+          Text(
+            currentQuestion.questionText,
+            style: const TextStyle(
               color: Colors.white,
             ),
           ),
           const SizedBox(
             height: 30,
           ),
-          AnswerButton(
-            answerText:
-                'Answer 1', //for positional argument we also have to write parameter used as positional argument
-            onTap: () {},
-          ),
-          AnswerButton(
-            answerText: 'Answer 2',
-            onTap: () {},
-          ),
-          AnswerButton(
-            answerText: 'Answer 3',
-            onTap: () {},
-          ),
-          AnswerButton(
-            answerText: 'Answer 4',
-            onTap: () {},
-          ),
+          //Here we convert values of List<String>answers to another value
+          // i.e. list of answer changes to list of button
+          //Here the function inside map takes individual answer for each button which automatically performed by dart
+          //...=> works to make list of answerbutton as individual button separated with commas
+          ...currentQuestion.answers.map((answer) {
+            return AnswerButton(answerText: answer, onTap: () {});
+          }),
         ],
       ),
     );
