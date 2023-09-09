@@ -40,7 +40,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
             // i.e. list of answer changes to list of button
             //Here the function inside map takes individual answer for each button which automatically performed by dart
             //...=> works to make list of answerbutton as individual button separated with commas
-            ...currentQuestion.answers.map((answer) {
+            ...currentQuestion.getShuffledAnswer().map((answer) {
               return AnswerButton(answerText: answer, onTap: () {});
             }),
           ],
