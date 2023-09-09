@@ -10,10 +10,17 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
-  final currentQuestion =
-      questions[0]; //used to assign first question with their list of answers
+  var currentQuestionIndex = 0;
+  void answerQuestion() {
+    setState(() {
+      currentQuestionIndex++;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    //used to assign first question with their list of answers
+    final currentQuestion = questions[currentQuestionIndex];
     return SizedBox(
       //We can also wrap Column() with Center but this is also another approach
       width: double.infinity, //this means it'll take as much width as available
@@ -41,7 +48,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
             //Here the function inside map takes individual answer for each button which automatically performed by dart
             //...=> works to make list of answerbutton as individual button separated with commas
             ...currentQuestion.getShuffledAnswer().map((answer) {
-              return AnswerButton(answerText: answer, onTap: () {});
+              return AnswerButton(answerText: answer, onTap: answerQuestion);
             }),
           ],
         ),
