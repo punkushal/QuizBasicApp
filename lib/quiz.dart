@@ -12,6 +12,8 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
   var activeScreen = "start-screen";
+  List<String> selectedAnswer =
+      []; //This variable will contain answers choosed by users
 
   void switchScreen() {
     //and when switchScreen() called
@@ -20,6 +22,11 @@ class _QuizState extends State<Quiz> {
     setState(() {
       activeScreen = "questions-screen";
     });
+  }
+
+  void choosedAnswer(String answer) {
+    //this function adds answer to the varible i.e. selectedAnswer
+    selectedAnswer.add(answer);
   }
 
   @override
@@ -40,7 +47,9 @@ class _QuizState extends State<Quiz> {
           child: activeScreen ==
                   "start-screen" //this is another approach to render content conditionally
               ? StartScreen(switchScreen)
-              : const QuestionScreen(), //now activeScreen represents the widget after all
+              : QuestionScreen(
+                  onSelectAnswer:
+                      choosedAnswer), //now activeScreen represents the widget after all
         ),
       ),
     );

@@ -4,15 +4,18 @@ import 'package:quiz_basic_app/answer_button.dart';
 import 'package:quiz_basic_app/data/questions.dart';
 
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({super.key});
+  const QuestionScreen({super.key, required this.onSelectAnswer});
 
+  final void Function(String answer)
+      onSelectAnswer; //this function will take choosedAnswer() from quiz.dart's QuestionScreen()
   @override
   State<QuestionScreen> createState() => _QuestionScreenState();
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
   var currentQuestionIndex = 0;
-  void answerQuestion() {
+  void answerQuestion(String selectedAnswer) {
+    widget.onSelectAnswer(selectedAnswer);
     setState(() {
       currentQuestionIndex++;
     });
@@ -50,7 +53,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
             //Here the function inside map takes individual answer for each button which automatically performed by dart
             //...=> works to make list of answerbutton as individual button separated with commas
             ...currentQuestion.getShuffledAnswer().map((answer) {
-              return AnswerButton(answerText: answer, onTap: answerQuestion);
+              return AnswerButton(
+                  answerText: answer,
+                  onTap: () {
+                    answerQuestion(answer);
+                  });
             }),
           ],
         ),
