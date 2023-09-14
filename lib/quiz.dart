@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_basic_app/data/questions.dart';
 import 'package:quiz_basic_app/question_screen.dart';
+import 'package:quiz_basic_app/result_screen.dart';
 import 'package:quiz_basic_app/start_screen.dart';
 
 class Quiz extends StatefulWidget {
@@ -31,13 +32,20 @@ class _QuizState extends State<Quiz> {
     if (selectedAnswer.length == questions.length) {
       selectedAnswer = [];
       setState(() {
-        activeScreen = "start-screen";
+        activeScreen = "result-screen";
       });
     }
   }
 
   @override
   Widget build(context) {
+    Widget switchWidget = StartScreen(switchScreen);
+    if (activeScreen == 'questions-screen') {
+      switchWidget = QuestionScreen(onSelectAnswer: choosedAnswer);
+    }
+    if (activeScreen == 'result-screen') {
+      switchWidget = const ResultScreen();
+    }
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -51,12 +59,7 @@ class _QuizState extends State<Quiz> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: activeScreen ==
-                  "start-screen" //this is another approach to render content conditionally
-              ? StartScreen(switchScreen)
-              : QuestionScreen(
-                  onSelectAnswer:
-                      choosedAnswer), //now activeScreen represents the widget after all
+          child: switchWidget,
         ),
       ),
     );
