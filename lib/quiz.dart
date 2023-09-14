@@ -44,7 +44,9 @@ class _QuizState extends State<Quiz> {
       switchWidget = QuestionScreen(onSelectAnswer: choosedAnswer);
     }
     if (activeScreen == 'result-screen') {
-      switchWidget = const ResultScreen();
+      switchWidget = ResultScreen(
+        chosenAnswer: selectedAnswer,
+      );
     }
     return MaterialApp(
       home: Scaffold(
