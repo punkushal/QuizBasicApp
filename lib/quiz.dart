@@ -30,7 +30,6 @@ class _QuizState extends State<Quiz> {
     //this function adds answer to the varible i.e. selectedAnswer
     selectedAnswer.add(answer);
     if (selectedAnswer.length == questions.length) {
-      selectedAnswer = [];
       setState(() {
         activeScreen = "result-screen";
       });
