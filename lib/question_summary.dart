@@ -21,6 +21,16 @@ class QuestionSummary extends StatelessWidget {
             Text(
               ((data['question-index'] as int) + 1).toString(),
             ),
+            Column(
+              children: [
+                Text(data['question'] as String),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(data['user-answer'] as String),
+                Text(data['correct-answer'] as String),
+              ],
+            )
           ],
         );
       }).toList(),
