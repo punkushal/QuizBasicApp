@@ -26,17 +26,26 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final summaryData = getSummaryData();
+    final totalQuestions = questions.length;
+    //In where() if the condition is met correctly
+    //then it will added otherwise droped down
+    //and here we need number of correctAnswers that's why used lenth()
+    final totalCorrectAnswers = summaryData.where((data) {
+      return data['user-answer'] == data['correct-answer'];
+    }).length;
     return SizedBox(
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('You answered X out of Y questions correctly!'),
+          Text(
+              'You answered $totalCorrectAnswers out of $totalQuestions questions correctly!'),
           const SizedBox(
             height: 20,
           ),
           QuestionSummary(
-            getSummaryData(),
+            summaryData,
           ),
           const SizedBox(
             height: 20,
